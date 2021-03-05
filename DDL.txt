@@ -1,0 +1,36 @@
+create DATABASE gomycode;
+USE gomycode;
+
+CREATE TABLE customer 
+( 
+customer_id VARCHAR(20), 
+customer_name VARCHAR(20) NOT NULL, 
+customer_tel NUMBER, 
+PRIMARY KEY (customer_id) 
+);
+
+CREATE TABLE product
+( 
+product_id VARCHAR(20), 
+product_name VARCHAR(20) NOT NULL, 
+price NUMBER UNSIGNED, 
+PRIMARY KEY (product_id) 
+);
+
+CREATE TABLE orders
+( 
+quanity NUMBER,
+total_amount NUMBER,
+product_id VARCHAR(20), 
+customer_id VARCHAR(20), 
+CONSTRAINT FK_customerOrder FOREIGN KEY (customer_id)
+    REFERENCES customer(customer_id),
+CONSTRAINT FK_productOrder FOREIGN KEY (product_id)
+    REFERENCES product(product_id),
+);
+
+ALTER TABLE product
+ADD Category VARCHAR(20);
+
+ALTER TABLE orders 
+ADD OrderDate DATE DEFAULT GETDATE();
